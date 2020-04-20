@@ -1,0 +1,29 @@
+-- 1-bit Full Adder / Sayısal Tasarım Lab. "VHDL ile Devre Tasarımı" deneyi ödevi.
+
+
+LIBRARY IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- port() gösteriminin içerisinde 1-bitlik tam toplayıcının giriş ve çıkışlarını tanımlıyoruz.
+-- bu devre, iki biti (a,b), elde girişi(cin), toplam çıkış(sum) ve bir elde çıkışı(cout) ile birlikte toplayacak.
+entity BIT_ADDER is
+        port( a, b, cin         : in  STD_LOGIC;
+              sum, cout         : out STD_LOGIC );
+end BIT_ADDER;
+
+-- 1-bitlik tam toplayıcının fonksiyon tanımlaması
+architecture BHV of BIT_ADDER is
+begin
+        
+        -- 1-bitlik tam toplayıcının toplam(sum) hesabı.
+        sum <=  (not a and not b and cin) or
+                        (not a and b and not cin) or
+                        (a and not b and not cin) or
+                        (a and b and cin);
+
+        -- 1-bitlik tam toplayıcının elde çıkışı(cout) hesabı.
+        cout <= (not a and b and cin) or
+                        (a and not b and cin) or
+                        (a and b and not cin) or
+                        (a and b and cin);
+end BHV;

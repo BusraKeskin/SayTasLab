@@ -16,14 +16,14 @@ architecture BHV of BIT_ADDER is
 begin
         
         -- 1-bitlik tam toplayıcının toplam(sum) hesabı.
-        sum <=  (not a and not b and cin) or
-                        (not a and b and not cin) or
-                        (a and not b and not cin) or
-                        (a and b and cin);
+        -- Uzun yolla şöyle yapılabilir:
+        --sum <=  (not a and not b and cin) or
+                        --(not a and b and not cin) or
+                        --(a and not b and not cin) or
+                        --(a and b and cin);
+        -- Kullanmayı tercih ettiğim:                 
+        sum <= a xor b xor cin;
 
         -- 1-bitlik tam toplayıcının elde çıkışı(cout) hesabı.
-        cout <= (not a and b and cin) or
-                        (a and not b and cin) or
-                        (a and b and not cin) or
-                        (a and b and cin);
+        cout <= (a and b) or (cin and a) or (cin and b)
 end BHV;
